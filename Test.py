@@ -25,5 +25,8 @@ data = [[x for x in val.values()] for val in data_dict_df.values()]
 
 df = pd.DataFrame([x for x in selected_column_df.T.to_dict('list').values()])
 df.columns = [selected_column]
-df.to_csv('jg_employee_selected_column.csv', index=False)
-# print(df.columns)
+# df.to_csv('jg_employee_selected_column.csv', index=False)
+nmpy_dt = np.array(df)
+
+np.savetxt('np.txt', nmpy_dt, selected_column)
+print(nmpy_dt)
