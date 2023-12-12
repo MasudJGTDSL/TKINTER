@@ -4,6 +4,7 @@ from tkinter import messagebox
 from tkinter import colorchooser
 import sqlite3
 
+
 from configparser import ConfigParser
 import numpy as np
 import pandas as pd
@@ -16,7 +17,37 @@ from datetime import datetime
 root = Tk()
 root.title("CRM App With Treeview and SQLite3")
 root.iconbitmap("images/MS24.ico")
-root.geometry("1000x550")
+root.resizable(False, False)
+# ==============================
+window_height = 550
+window_width = 1000
+def center_screen():
+    """ gets the coordinates of the center of the screen """
+    global screen_height, screen_width, x_cordinate, y_cordinate
+    screen_width = root.winfo_screenwidth()
+    screen_height = root.winfo_screenheight()
+        # Coordinates of the upper left corner of the window to make the window appear in the center
+    x_cordinate = int((screen_width/2) - (window_width/2))
+    y_cordinate = int((screen_height/2) - (window_height/2))
+    root.geometry("{}x{}+{}+{}".format(window_width, window_height, x_cordinate, y_cordinate))
+center_screen()
+
+# width = 1000  # Width
+# height = 550  # Height
+
+# screen_width = root.winfo_screenwidth()  # Width of the screen
+# screen_height = root.winfo_screenheight()  # Height of the screen
+
+# # Calculate Starting X and Y coordinates for Window
+# x = int((screen_width / 2) - (width / 2))
+# y = int((screen_height / 2) - (height / 2))
+# print("screen_width", screen_width, "screen_height:", screen_height, "x:", x, " y:",y)
+
+# root.geometry("{}x{}+{}+{}".format(width, height, x, y))
+# # ==============================
+
+# root.geometry("1000x600")
+# root.eval('tk::PlaceWindow . center')
 
 parser = ConfigParser()
 parser.read("configurations.ini")
@@ -141,16 +172,18 @@ def highlight_color():
         # Save the config file
         with open("configurations.ini", "w") as configfile:
             parser.write(configfile)
+
+
 def reset_color():
-    my_tree.tag_configure("oddrow", background='papayawhip')
-    my_tree.tag_configure("evenrow", background='white')
-    style.map("Treeview", background=[("selected", '#838B83')])
+    my_tree.tag_configure("oddrow", background="papayawhip")
+    my_tree.tag_configure("evenrow", background="white")
+    style.map("Treeview", background=[("selected", "#838B83")])
 
     # Set the color change
     parser.read("configurations.ini")
-    parser.set("colors", "primary_color", 'papayawhip')
-    parser.set("colors", "secondary_color", 'white')
-    parser.set("colors", "highlight_color", '#838B83')
+    parser.set("colors", "primary_color", "papayawhip")
+    parser.set("colors", "secondary_color", "white")
+    parser.set("colors", "highlight_color", "#838B83")
     # Save the config file
     with open("configurations.ini", "w") as configfile:
         parser.write(configfile)

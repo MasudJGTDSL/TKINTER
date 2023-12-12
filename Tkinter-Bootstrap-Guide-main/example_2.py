@@ -26,7 +26,7 @@ class Gradebook(ttk.Frame):
         self.create_form_entry("Student ID: ", self.student_id)
         self.create_form_entry("Course Name: ", self.course_name)
         self.final_score_input = self.create_form_entry("Final Score: ", self.final_score)
-        self.create_meter()
+        # self.create_meter()
         self.create_buttonbox()
 
         self.table = self.create_table()
